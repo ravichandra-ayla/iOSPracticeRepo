@@ -1,0 +1,88 @@
+# Fastfile (General)
+# 
+#    Fastlane coordinates actions absed on this file.
+#
+# Pulls in dependent files, determining inheritance and resolution order.
+#
+# Functions/variables defined in ayla_core and app_core are available
+# Additionally, variables defined in the Appfile, 
+#    and in 'dotenv' .env property files are also available.
+#
+# 
+fastlane_version "2.105.0"
+fastlane_require 'dotenv'
+
+#
+# Mainline functions and lanes are defined here
+import "ayla_core.rb"
+
+# Any app specific overrides are performed here
+#    File should be located in app repo
+#
+# This project_core file, along with the Appfile and any additional .env files should be 
+#    associated to the GitHub repo.
+sleep 1
+import "project_core.rb"
+
+# Anything after this line will override anything else.
+
+def print_app_info 
+	UI.message("Printing iOS Appfile Info!")
+	app_identifier = CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier)
+	apple_id = CredentialsManager::AppfileConfig.try_fetch_value(:apple_id)
+	UI.message("Apple ID: #{apple_id}")
+	UI.message("App Bundle ID: #{app_identifier}")
+
+	UI.message("Scheme: #{ENV['BUILD_SCHEME']}")
+	UI.message("Test Username: #{ENV['TEST_USERNAME']}")
+	#test_string()
+end
+
+#alias_method :test_string, :old_test_string
+
+# Overrides app_core.rb version, which overrides ayla_core.rb version.
+#   See import order at top.
+def test_string
+	UI.message "test_string from the Fastfile"
+end
+
+before_all do |lane, options|
+	UI.message("Execution of before_all block")
+	if ENV['DOTENV'] or options[:dotenv]
+		Dotenv.load('Release.env') # Dependency branch specifiers
+		UI.important "Pulling in dotenv vars from 'Release.env' file"
+	end
+	Dotenv.overload('.env.secrets') # Always loads the secrets file if it's available
+	Dotenv.overload('.env.ids')
+	before_all_project(lane, options)
+end
+
+
+platform :independent do
+	desc "Test lane for use with platform idependent projects, such as common_sepia."
+	lane :indie_test do
+		UI.important("Common Fastfile test")
+		print_app_info
+	end
+end
+
+platform :ios do
+	
+	desc "Description of what the lane does"
+	lane :fasttest do
+		print_app_info
+	end
+	
+	override_lane :fasttest_base do
+		UI.message("fasttest_base: overridden by main Fastfile")
+	end
+	
+	desc "Simple test to check whether the 'is_ci' fastlane conditional is functioning as expected."
+	lane :ci_test do
+		if is_ci?
+			UI.important "CI System Detected"
+		else
+			UI.important "No CI System Detected."
+		end
+	end
+end
