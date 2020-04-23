@@ -21,9 +21,9 @@ team_id(ENV['TEAM_ID']) # Team ID used with Xcode code signing
 #    ENV['var_name']
 #    UI.message("Scheme: #{ENV['var_name']}")
 
-ENV['BUILD_SCHEME'] = "iOS_Aura"
-ENV['REPO_NAME'] = "iOS_Aura"
-ENV['SOURCE_DIR'] = "../iOS_Aura"
+ENV['BUILD_SCHEME'] = "iOSPracticeRepo"
+ENV['REPO_NAME'] = "iOSPracticeRepo"
+ENV['SOURCE_DIR'] = "../iOSPracticeRepo"
 
 ENV['HAS_APPLICATION'] = "true"
 
