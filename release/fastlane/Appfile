@@ -21,9 +21,9 @@ team_id(ENV['TEAM_ID']) # Team ID used with Xcode code signing
 #    ENV['var_name']
 #    UI.message("Scheme: #{ENV['var_name']}")
 
-ENV['BUILD_SCHEME'] = "iOSPracticeRepo"
+ENV['BUILD_SCHEME'] = "TestApp"
 ENV['REPO_NAME'] = "iOSPracticeRepo"
-ENV['SOURCE_DIR'] = "../iOSPracticeRepo"
+ENV['SOURCE_DIR'] = "../TestApp"
 
 ENV['HAS_APPLICATION'] = "true"
 
@@ -31,8 +31,6 @@ ENV['VERSION_FILE'] = "Info.plist"
 
 ENV['PODFILE_FILE'] = "../Podfile"
 ENV['BUILD_SCRIPT_F'] = "../Podfile"
-
-ENV['VERSION_FILE'] = "Info.plist"
 
 
 
