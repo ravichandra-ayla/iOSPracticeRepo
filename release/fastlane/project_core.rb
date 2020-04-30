@@ -49,6 +49,9 @@ end
 
 # Sets the value in the Info.plist file to the provided new version number
 def set_version_string(version)
+    
+    create_prerelease_branch(version)
+    
     vFile = get_version_file
     [vFile].each do |f|
     	UI.message "Updating version value in file #{vFile}"
@@ -56,6 +59,44 @@ def set_version_string(version)
         file_contents.gsub!(/(.*<key>CFBundleShortVersionString<\/key>\n.*<string>)(.*)(<\/string>.*)/, "\\1#{version}\\3")
         File.write(f, file_contents)
     end
+    commit_prerelease_changes(version)
+    #create_prerelease_pr(version)
+end
+
+def get_prerelease_branch_name(version)
+    return "prerelease/#{version}"
+end
+    
+
+def create_prerelease_branch(version)
+    branch_name = get_prerelease_branch_name(version)
+    UI.message "Creating prerelease branch #{branch_name}"
+    git_command(full_command: "git checkout -b #{branch_name}")
+    git_command(full_command: "git push -u origin #{branch_name}")
+end
+
+def commit_prerelease_changes(version)
+    branch_name = get_prerelease_branch_name(version)
+    git_command(full_command: "git commit -am 'Verion/s incremented before release'")
+    git_command(full_command: "git push origin #{branch_name}")
+    puts "commit changes are done"
+end
+
+def create_prerelease_pr(version)
+    
+    branch_name = get_prerelease_branch_name(version)
+    internal_repo_name = `basename \`git rev-parse --show-toplevel\``.strip
+    puts "internal_repo_name = #{internal_repo_name}"
+    target_branch = 'develop'
+    
+    create_pull_request(
+      api_token: ENV["GITHUB_API_TOKEN"],
+      repo: "https://github.com/ravichandra-ayla/#{internal_repo_name}",
+      title: "Version incremented before release",
+      base: target_branch,
+      head: branch_name
+    )
+   
 end
 
 
