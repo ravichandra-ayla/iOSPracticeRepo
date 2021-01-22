@@ -36,6 +36,11 @@ The [Common Sepia Assets](https://github.com/AylaNetworks/common_sepia_assets_Pu
 
 # Release Notes
 
+### [6.6.4](https://github.com/AylaNetworks/iOS_FastTrack_Public/releases/tag/v6.6.4)
+#### (2021-01-30)
+- FastTrack UI Misc. fixes
+
+
 ### [6.6.3](https://github.com/AylaNetworks/iOS_FastTrack_Public/releases/tag/v6.6.3)
 #### (2021-01-18)
 - Updated localizations and image assets for schedules, onboarding screens
