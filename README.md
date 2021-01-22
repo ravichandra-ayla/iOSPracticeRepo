@@ -34,7 +34,7 @@ The [Common Sepia Assets](https://github.com/AylaNetworks/common_sepia_assets_Pu
 - [Xcode 12.0.1](https://developer.apple.com/xcode/downloads/) or higher
 - iOS 12.2 or higher
 
-## Releases 
+# Release Notes
 
 ### [6.6.3](https://github.com/AylaNetworks/iOS_FastTrack_Public/releases/tag/v6.6.3)
 #### (2021-01-18)
