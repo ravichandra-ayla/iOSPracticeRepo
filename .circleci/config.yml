@@ -37,20 +37,21 @@ jobs:
 workflows:
   version: 2
   
-  nightly_build: # this is the name of our workflow
+  daily_build: # daily_build workflow
     triggers: # schedule a trigger to run corn on UTC everynight
+      # configured to run every day at 00:00am UTC
       - schedule:
-          cron: "0 9 * * *"
+          cron: "0 0 * * *"
           filters:
             branches:
               only:
                 - develop
-    jobs: # and here we list the jobs we are going to run.
+    jobs: # daily_build jobs.
       - prepare
       - dispatch_build
   
-  code_release:
-    jobs:
+  code_release: # code_release workflow
+    jobs: # code_release jobs.
       - prepare
       - code_release
 
