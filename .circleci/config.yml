@@ -24,7 +24,7 @@ jobs:
 
 workflows:
   version: 2
-  tf_nightly_build: # this is the name of our workflow
+  nightly_build: # this is the name of our workflow
     triggers: # chedule a trigger to run corn on UTC everynight
       - schedule:
           cron: "0 9 * * *"
