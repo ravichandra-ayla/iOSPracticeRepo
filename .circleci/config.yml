@@ -16,6 +16,12 @@ jobs:
     steps:
       - run: fastlane beta
 
+  code_release:
+    macos:
+      xcode: 12.3.0 # Specify the Xcode version to use
+    steps:
+      - run: fastlane code_release $RELEASE_VERSION forec:true
+
 workflows:
   version: 2
   tf_nightly_build: # this is the name of our workflow
@@ -29,5 +35,10 @@ workflows:
     jobs: # and here we list the jobs we are going to run.
       - prepare
       - dispatch_build
+  
+  code_release:
+    jobs:
+      - prepare
+      - code_release
 
 
