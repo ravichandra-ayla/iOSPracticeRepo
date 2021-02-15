@@ -37,6 +37,11 @@ jobs:
 workflows:
   version: 2
   
+  code_release: # code_release workflow
+    jobs: # code_release jobs.
+      - prepare
+      - code_release
+      
   daily_build: # daily_build workflow
     triggers: # schedule a trigger to run corn on UTC everynight
       # configured to run every day at 00:00am UTC
@@ -50,9 +55,6 @@ workflows:
       - prepare
       - dispatch_build
   
-  code_release: # code_release workflow
-    jobs: # code_release jobs.
-      - prepare
-      - code_release
+  
 
 
