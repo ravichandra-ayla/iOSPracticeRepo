@@ -8,6 +8,18 @@ jobs:
     macos:
       xcode: 12.3.0 # Specify the Xcode version to use
     steps:
+      - run:
+          name: "Appple ID used for build release"
+          command: echo $APPLE_ID
+      - run:
+          name: "Appple Developer Team ID used for build release"
+          command: echo $TEAM_ID
+      - run:
+          name: "GitHub API token used for code and build release"
+          command: echo $GITHUB_API_TOKEN
+      - run:
+          name: "Ayla account used for build and code release"
+          command: echo $RELEASE_USER
       - checkout
       - run: ./release/release_setup.sh 
   dispatch_build:
@@ -24,8 +36,9 @@ jobs:
 
 workflows:
   version: 2
+  
   nightly_build: # this is the name of our workflow
-    triggers: # chedule a trigger to run corn on UTC everynight
+    triggers: # schedule a trigger to run corn on UTC everynight
       - schedule:
           cron: "0 9 * * *"
           filters:
