@@ -36,6 +36,11 @@ The [Common Sepia Assets](https://github.com/AylaNetworks/common_sepia_assets_Pu
 
 # Release Notes
 
+### [6.6.11](https://github.com/AylaNetworks/iOS_FastTrack_Public/releases/tag/v6.6.11)
+#### (2021-09-23)
+- FastTrack UI Misc. fixes
+
+
 ### [6.6.10](https://github.com/AylaNetworks/iOS_FastTrack_Public/releases/tag/v6.6.10)
 #### (2021-09-23)
 - FastTrack UI Misc. fixes
