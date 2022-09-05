@@ -1,0 +1,967 @@
+{
+  "version": "0.4",
+  "name": "Ayla Mobile Foundry Configuration",
+  "applicationIdentifier": "com.aylanetworks.sepiaapp",
+  "packages": ["com.aylanetworks.sepiaapp.screens", "com.aylanetworks.sepiaapp.devices", "com.aylanetworks.sepiaapp.controls", "com.aylanetworks.sepiaapp.geofence",
+    "com.aylanetworks.sepiaapp.screens"],
+  "bundles": [],
+  "sdkConfig": {
+    "appId": "sepiaapp-0dfc7900-id",
+    "appSecret": "sepiaapp-0dfc7900-6s3Wn_kLZpbrV2ZomcCqK0EuIeQ",
+    "allowMobileDSS": true,
+    "allowOfflineUse": true,
+    "serviceType": "Development",
+    "serviceLocation": "USA",
+    "consoleLogLevel": "Debug",
+    "fileLogLevel": "Debug",
+    "xPlatformID": "12345",
+    "defaultNetworkTimeoutMs": 5000
+  },
+  "devices": [
+    {
+      "class": "FoundryEVBDevice",
+      "name": "ayla_evb_name",
+      "detailScreen": "device_details",
+      "deviceControl": "evb_control",
+      "icon": "ayla_evb_name",
+      "deviceInfo": {
+        "oemModel": "ledevb",
+        "scheduleScreen": "schedule"
+      },
+      "ssidRegex": "Ayla-[0-9a-zA-Z]{12}",
+      "registrationType": null,
+      "managedProperties": [
+        {
+          "control": "led_light_blue",
+          "name": "Blue_LED",
+          "notify": true,
+          "schedule": true,
+          "notification_template": "blue_led_on",
+          "actions": [
+            {
+              "name": "blue_led_on",
+              "icon": "led_blue_on",
+              "value": 1
+            },
+            {
+              "name": "blue_led_off",
+              "icon": "led_blue_off",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "control": "led_light_green",
+          "name": "Green_LED",
+          "notify": true,
+          "schedule": true,
+          "actions": [
+            {
+              "name": "green_led_on",
+              "icon": "led_green_on",
+              "operator": "==",
+              "value": 1
+            },
+            {
+              "name": "green_led_off",
+              "icon": "led_green_off",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "control": "blue_button",
+          "name": "Blue_button",
+          "notify": true,
+          "schedule": false,
+          "readOnly": true,
+          "actions": [
+            {
+              "name": "blue_button_closed",
+              "icon": "pushbutton_blue_pressed",
+              "value": 1
+            },
+            {
+              "name": "blue_button_open",
+              "icon": "pushbutton_blue_unpressed",
+              "value": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "class": "FoundryBLEDemoBoard",
+      "name": "ayla_ble_demo_board",
+      "icon": "ayla_ble_demo_board",
+      "deviceInfo": {
+        "model": "bledemo",
+        "oemModel": "ggnode",
+        "localDeviceOEM": "0dfc7900"
+      },
+      "detailScreen" : "device_details",
+      "deviceControl": "ble_alt_device_control",
+      "registrationType": "Local",
+      "bleServiceId" : "FE28",
+      "managedProperties": [
+        {
+          "name": "00:bletstat:local_temp",
+          "roles": ["localTemp"],
+          "notify": true,
+          "schedule": false,
+          "units": "F"
+        },
+        {
+          "name": "00:bletstat:temp_setpoint",
+          "roles": ["tempSetpoint"],
+          "notify": true,
+          "schedule": true,
+          "units": "F"
+        },
+        {
+          "control": "ble_ac",
+          "name": "00:bletstat:ac_on",
+          "roles": ["acOn"]
+        },
+        {
+          "control": "ble_heat",
+          "name": "00:bletstat:heat_on",
+          "roles": ["heatOn"]
+        },
+        {
+          "control": "ble_vacation",
+          "name": "00:bletstat:vacation_mode",
+          "roles": ["vacationModeOn"]
+        }
+      ]
+    },
+    {
+      "class": "SepiaBLEGateway",
+      "icon": "ayla_generic_gateway",
+      "name": "ayla_ble_gateway",
+      "registrationType": "Same-LAN",
+      "ssidRegex": "Ayla-[0-9a-zA-Z]{12}",
+      "deviceInfo": {
+        "oemModel": "linuxevb",
+        "model": "AY001MRT1",
+        "template_id": 26939,
+        "swVersion": "bt_gatewayd 1.5-eng 2018-04-23 12:13:57 root/"
+      }
+    },
+    {
+      "class": "FoundryBLEColorBulb",
+      "icon": "ayla_ble_color_bulb",
+      "name": "ayla_ble_color_bulb",
+      "deviceControl": "ble_color_bulb_control",
+      "detailScreen" : "ble_color_bulb_details",
+      "registrationType": "Node",
+      "gatewayClass": "SepiaBLEGateway",
+      "deviceInfo": {
+        "oemModel": "MagicBlue",
+        "model": "GenericNode"
+      },
+      "managedProperties": [
+        {
+          "name": "00:bulb_rgb:fade"
+        },
+        {
+          "name": "00:bulb_rgb:fade_rate"
+        },
+        {
+          "name": "00:bulb_rgb:mode"
+        },
+        {
+          "name": "00:bulb_rgb:onoff",
+          "control":"bulb_on_off_switch"
+        },
+        {
+          "name": "00:bulb_rgb:rgb"
+        },
+        {
+          "name": "00:bulb_rgb:white"
+        }
+      ]
+    },
+    {
+      "class": "FoundryBLEGrillRight",
+      "icon": "ayla_ble_grill_right",
+      "name": "ayla_ble_grill_right",
+      "deviceControl": "ble_grill_right_control",
+      "detailScreen" : "ble_grill_right_details",
+      "registrationType": "Node",
+      "gatewayClass":"SepiaBLEGateway",
+      "deviceInfo": {
+        "oemModel": "Grillright",
+        "model": "GenericNode"
+      },
+      "managedProperties": [
+        {
+          "name": "00:grillrt:ALARM"
+        },
+        {
+          "name": "00:grillrt:CONTROL_MODE"
+        },
+        {
+          "name": "00:grillrt:COOKING"
+        },
+        {
+          "name": "00:grillrt:MEAT"
+        },
+        {
+          "name": "00:grillrt:DONENESS"
+        },
+        {
+          "name": "00:grillrt:PCT_DONE"
+        },
+        {
+          "name": "00:grillrt:TIME"
+        },
+        {
+          "name": "00:grillrt:TARGET_TIME"
+        },
+        {
+          "name": "00:grillrt:TEMP"
+        },
+        {
+          "name": "00:grillrt:TARGET_TEMP"
+        },
+        {
+          "name": "01:grillrt:ALARM"
+        },
+
+        {
+          "name": "01:grillrt:CONTROL_MODE"
+        },
+
+        {
+          "name": "01:grillrt:COOKING"
+        },
+
+        {
+          "name": "01:grillrt:MEAT"
+        },
+
+        {
+          "name": "01:grillrt:DONENESS"
+        },
+
+        {
+          "name": "01:grillrt:PCT_DONE"
+        },
+
+        {
+          "name": "01:grillrt:TIME"
+        },
+
+        {
+          "name": "01:grillrt:TARGET_TIME"
+        },
+
+        {
+          "name": "01:grillrt:TEMP"
+        },
+        {
+          "name": "01:grillrt:TARGET_TEMP"
+        }
+      ]
+    },
+    {
+      "class": "FoundrySmartPlug",
+      "name": "ayla_smartplug_name",
+      "icon": "ayla_smartplug_name",
+      "detailScreen": "device_details",
+      "deviceControl": "smartplug_control",
+      "deviceInfo": {
+        "oemModel": "smartplug1"
+      },
+      "ssidRegex": "Ayla-[0-9a-zA-Z]{12}",
+      "registrationType": "Button-Push",
+      "templates": {
+        "on_connection_lost": "on_connection_lost_template",
+        "on_connection_restore": "on_connection_restore_template"
+      },
+      "managedProperties": [
+        {
+          "control": "generic_switch",
+          "name": "outlet1",
+          "notify": true,
+          "schedule": true,
+          "roles": ["power"],
+          "actions": [
+            {
+              "name": "off",
+              "icon": "button_cooling_off",
+              "value": 0
+            },
+            {
+              "name": "on",
+              "icon": "button_cooling_on",
+              "value": 1
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "userExperience": {
+    "templates": [
+      {
+        "name": "new_account_template",
+        "template_id": "new_account_template",
+        "subject": "new_account_subject",
+        "html": "new_account_html"
+      },
+      {
+        "name": "reset_password_template",
+        "template_id": "reset_password_template",
+        "subject": "reset_password_subject",
+        "html": "reset_pw_html"
+      },
+      {
+        "name": "blue_led_on",
+        "template_id": "property_change_template_id",
+        "subject": "blue_led_on_subject",
+        "html": "blue_led_on_html"
+      }
+    ],
+    "defaultConfig": {
+      "windowBackgroundColor": "greyBG",
+      "textColor": "white",
+      "toolbarColor": "primaryColor",
+      "toolbarTextColor": "white",
+      "accentColor": "accentColor",
+      "wantsTitleBar": true,
+      "disableDrawerMenu": false,
+      "allowOfflineModification": false,
+      "logoImage": "ayla_logo",
+      "buttonBackgroundColor": "accentColor",
+      "buttonTextColor": "white",
+      "segmentedControlColor": "accentColor",
+      "listBackgroundColor": "white",
+      "listTextColor": "grey20"
+    },
+    "controls": [
+      {
+        "name": "led_light_green",
+        "class": "SepiaOnOffControl",
+        "extras": {
+          "onImage": "green_led_on",
+          "offImage": "green_led_off"
+        }
+      },
+      {
+        "name": "led_light_blue",
+        "class": "SepiaOnOffControl",
+        "extras": {
+          "onImage": "blue_led_on",
+          "offImage": "blue_led_off"
+        }
+      },
+      {
+        "name": "generic_number_control",
+        "class": "SepiaNumberControl",
+        "extras": {
+          "type": "decimal",
+          "style": "digital"
+        }
+      },
+      {
+        "name": "blue_button",
+        "class": "SepiaOnOffControl",
+        "extras": {
+          "onImage": "blue_button_on",
+          "offImage": "blue_button_off",
+          "readOnly": true
+        }
+      },
+      {
+        "name": "generic_switch",
+        "class": "SepiaOnOffControl",
+        "extras": {
+          "onImage": "bulb_on",
+          "offImage": "bulb_off"
+        }
+      },
+      {
+        "name": "bulb_on_off_switch",
+        "class": "SepiaOnOffControl",
+        "extras": {
+          "property":"onoff",
+          "onImage": "bulb_on",
+          "offImage": "bulb_off"
+        }
+      },
+      {
+        "name": "ble_alt_device_control",
+        "class": "FoundryBLEDemoControl",
+        "extras": {
+          "bgHeat": "orange",
+          "bgCool": "coolBlue",
+          "bgOff": "darkSlate",
+          "textBackgroundColor": "paleYellow",
+          "textColor": "black"
+        }
+      },
+      {
+        "name": "temp_setpoint_control",
+        "class": "SepiaTempSetpointControl",
+        "extras": {
+          "arrowColor": "white"
+        }
+      },
+      {
+        "name": "temp_setpoint_control_details",
+        "class": "SepiaTempSetpointControl",
+        "extras": {
+          "circleColor": "transparent",
+          "arrowColor": "white",
+          "horizontal": false,
+          "hasDots": false
+        }
+      },
+      {
+        "name": "temp_setpoint_control_horiz",
+        "class": "SepiaTempSetpointControl",
+        "extras": {
+          "circleColor": "transparent",
+          "arrowColor": "white",
+          "horizontal": true,
+          "hasDots": false
+        }
+      },
+      {
+        "name": "ble_ac",
+        "class": "SepiaOnOffControl",
+        "extras": {
+          "onImage": "mode_cool",
+          "offImage": "mode_cool"
+        }
+      },
+      {
+        "name": "ble_heat",
+        "class": "SepiaOnOffControl",
+        "extras": {
+          "onImage": "mode_heat",
+          "offImage": "mode_heat"
+        }
+      },
+      {
+        "name": "ble_vacation",
+        "class": "SepiaOnOffControl",
+        "extras": {
+          "onImage": "icon_weather_day_sunny",
+          "offImage": "icon_weather_day_sunny"
+        }
+      },
+      {
+        "name": "evb_control",
+        "class": "FoundryEVBControl",
+        "extras": {
+          "windowBackgroundColor": "evbGreen",
+          "textBackgroundColor": "paleYellow",
+          "textColor": "black"
+        }
+      },
+      {
+        "name": "ble_color_bulb_control",
+        "class": "FoundryBLEColorBulbControl",
+        "extras": {
+          "bgColor": "secondaryColor",
+          "textBackgroundColor": "paleYellow",
+          "textColor": "black"
+        }
+      },
+      {
+        "name": "ble_grill_right_control",
+        "class": "FoundryBLEGrillRightControl",
+        "extras": {
+          "bgOnColor": "darkBrown",
+          "bgOffColor": "manatee",
+          "nameColor": "black",
+          "textBackgroundColor": "paleYellow",
+          "iconSelectedColor": "cello",
+          "iconNormalColor": "paleYellow"
+        }
+      },
+      {
+        "name": "smartplug_control",
+        "class": "SepiaOnOffDeviceControl",
+        "extras": {
+          "bgOnColor": "lightBrown",
+          "bgOffColor": "darkSlateBlue",
+          "offImage": null,
+          "onImage": null,
+          "textBackgroundColor": "paleYellow",
+          "textColor": "black"
+        }
+      }
+    ],
+    "screens": [
+      {
+        "class": "AllDevicesScreen",
+        "name": "device_list",
+        "icon": "ic_device_list",
+        "title": "device_list",
+        "extras": {
+          "addDeviceScreen": "setup_wizard",
+          "includeGateways": false,
+          "sortBy": "connectedAt",
+          "sortingOrder": "descending"
+        }
+      },
+      {
+        "class": "AllGatewaysScreen",
+        "name": "gateway_list",
+        "title": "gateway_list",
+        "icon": "ic_device_list",
+        "extras": {
+          "addDeviceScreen": "setup_wizard",
+          "sortBy": "connectedAt",
+          "sortingOrder": "descending"
+        }
+      },
+      {
+        "class": "AutoDeviceScreen",
+        "name": "auto_device",
+        "menu": "device_menu"
+      },
+      {
+        "class": "FoundryBLEColorBulbDetailsScreen",
+        "name": "ble_color_bulb_details",
+        "title": "ble_color_bulb_details",
+        "menu": "device_menu",
+        "extras": {
+          "windowBackgroundColor": "secondaryColor",
+          "textColor": "grey20"
+        }
+      },
+      {
+        "class": "FoundryBLEGrillRightDetailsScreen",
+        "name": "ble_grill_right_details",
+        "title": "ble_grill_right_screen_title",
+        "menu": "device_menu",
+        "extras": {
+          "windowBackgroundColor": "secondaryColor",
+          "textColor": "grey20"
+        }
+      },
+      {
+        "class": "AccountDetailsScreen",
+        "name": "edit_account",
+        "title": "edit_account",
+        "icon": "ic_account",
+        "extras": {
+            "fields": [ "email", "password", "first_name", "last_name"],
+            "mode": "editAccount",
+            "disableDrawerMenu": false,
+            "upperBackgroundImage": "header_background",
+            "lowerBackgroundImage": "footer_background", 
+            "lowerBackgroundColor": "secondaryColor",
+            "windowBackgroundColor": "darkSlate",
+            "textBackgroundColor": "translucentWhite",
+            "listBackgroundColor": "account_list_color",
+            "deleteAccountButtonColor": "brickRed"
+        }
+      },
+      {
+        "class": "AccountDetailsScreen",
+        "name": "sign_up",
+        "title": "sign_up",
+        "extras": {
+            "fields": [ "email", "password", "first_name", "last_name"],
+            "mode": "newAccount", 
+            "disableDrawerMenu": true,
+            "upperBackgroundImage": "header_background",
+            "lowerBackgroundImage": "footer_background", 
+            "lowerBackgroundColor": "secondaryColor",
+            "windowBackgroundColor": "darkSlate",
+            "textBackgroundColor": "translucentWhite",
+            "listBackgroundColor": "account_list_color"
+        }
+      },
+      {
+        "class": "SignInScreen",
+        "name": "sign_in",
+        "title": "sign_in",
+        "icon": "sign_in_icon",
+        "extras": {
+          "wantsTitleBar": false,
+          "disableDrawerMenu": true,
+          "backgroundImage": "sign_in_bg",
+          "logoImage": "ayla_logo",
+          "editTextBackgroundColor": "translucentWhite",
+          "upperBackgroundImage": "home_background_top",
+          "lowerBackgroundImage": "home_background_bottom",
+          "upperBackgroundColor": "#231F20",
+          "centerBackgroundColor": "accentColor",
+          "windowBackgroundColor": "darkSlate",
+          "useSocialLogin": true,
+          "requestDataGrantsAlertTitle": "user_data_grants",
+          "requestDataGrantsAlertMessage": "user_data_grants_description"
+        }
+      },
+      {
+        "class": "MenuScreen",
+        "name": "geofence_home",
+        "title": "geofence_home",
+        "icon": "ic_add_geofence",
+        "extras": {
+          "textColor": "black",
+          "list_bg": "listBackgroundColor",
+          "menu": "geofence_screen_menu"
+        }
+      },
+      {
+        "class": "GeofencesScreen",
+        "name": "geofence_list",
+        "title": "geofence_list",
+        "extras": {
+          "textColor": "black",
+          "list_bg": "listBackgroundColor",
+          "addGeofenceScreen": "add_geofence",
+          "mapViewScreen": "geofence_mapview"
+        }
+      },
+      {
+        "class": "AddGeofenceScreen",
+        "name": "add_geofence",
+        "title": "add_geofence",
+        "extras": {
+          "textColor": "black",
+          "windowBackgroundColor": "greyBG",
+          "textBackgroundColor": "translucentWhite",
+          "mapViewScreen": "geofence_mapview"
+        }
+      },
+      {
+        "class": "MapScreen",
+        "name": "geofence_mapview",
+        "extras": {
+          "map_circle_background" :"mapCircleBlue"
+        }
+      },
+      {
+        "class": "ActionsScreen",
+        "name": "actions_list",
+        "title": "actions_list",
+        "extras": {
+          "textColor": "black",
+          "list_bg": "listBackgroundColor",
+          "addActionScreen": "add_actions"
+        }
+      },
+      {
+        "class": "AddActionsScreen",
+        "name": "add_actions",
+        "title": "add_actions",
+        "extras": {
+          "textColor": "black",
+          "windowBackgroundColor": "greyBG"
+        }
+      },
+      {
+        "class": "SetupWizardScreen",
+        "name": "setup_wizard",
+        "title": "setup_wizard",
+        "icon": "ic_add_device",
+        "extras": {
+          "windowBackgroundColor": "secondaryColor",
+          "listBackgroundColor" :"paleYellow"
+        }
+      },
+      {
+        "class": "DeviceDetailsScreen",
+        "name": "device_details",
+        "title": "device_details",
+        "icon": "device_details_icon",
+        "menu": "device_menu",
+        "extras": {
+          "scheduleListScreen": "schedule_list",
+          "shareDeviceScreen": "share_devices",
+          "textColor": "grey20"
+        }
+      },
+      {
+        "class": "DeviceRulesScreen",
+        "name": "device_rules",
+        "title": "device_rules",
+        "icon": "device_rules_icon",
+        "extras": {
+          "textColor": "grey20",
+          "windowBackgroundColor": "greyBG",
+          "listBackgroundColor":"white"
+        }
+      },
+      {
+        "class": "AddRuleScreen",
+        "name": "add_rule",
+        "title": "add_rule",
+        "icon": "add_rule_icon",
+        "extras": {
+          "textColor": "grey20",
+          "windowBackgroundColor": "greyBG",
+          "listBackgroundColor":"white"
+        }
+      },
+      {
+        "class": "ScheduleView",
+        "name": "device_schedule",
+        "title": "schedule",
+        "icon": "schedule_icon"
+      },
+      {
+        "class": "AppSettingsScreen",
+        "name": "settings",
+        "title": "settings",
+        "icon": "ic_settings",
+        "extras": {
+          "textColor": "black"
+        }
+      },
+      {
+        "class": "ChooseConfigScreen",
+        "name": "choose_config",
+        "title": "choose_config",
+        "icon": "ic_wrench",
+        "extras": {
+            "textColor": "black"
+        }
+      },
+      {
+        "class": "ScheduleListScreen",
+        "name": "schedule_list",
+        "title": "device_schedules",
+        "extras": {
+            "scheduleScreen": "schedule",
+            "textColor": "primaryColor",
+            "listBackgroundColor":"white"
+        }
+      },
+      {
+        "class": "ScheduleScreen",
+        "name": "schedule",
+        "title": "edit_schedule",
+        "extras": {
+            "textColor": "primaryColor",
+            "listBackgroundColor":"white"
+        }
+      },
+      {
+        "class": "ScheduleActionScreen",
+        "name": "schedule_action",
+        "title": "edit_schedule",
+        "extras": {
+            "textColor": "primaryColor",
+            "listBackgroundColor":"white"
+        }
+      },
+      {
+        "class": "ShareListScreen",
+        "name": "shares_list",
+        "title": "shares",
+        "icon": "shares_icon",
+        "extras": {
+          "shareDeviceScreen": "share_devices",
+          "textColor": "black"
+        }
+      },
+      {
+        "class": "ShareDevicesScreen",
+        "name": "share_devices",
+        "title": "share",
+        "icon": "shares_icon",
+        "extras": {
+          "textColor": "black",
+          "editTextColor": "primaryColor",
+          "textBackgroundColor": "translucentWhite"
+        }
+      },
+      {
+        "class": "FoundryBLEDetailsScreen",
+        "name": "ble_demo_details",
+        "title": "ble_demo_details",
+        "icon": "ic_ble_details",
+        "extras": {
+          "bgHeat": "orange",
+          "bgCool": "coolBlue"
+        }
+      },
+      {
+        "class": "MenuScreen",
+        "name": "support",
+        "icon": "ic_support",
+        "title": "support_screen_title",
+        "extras": {
+          "textColor": "black",
+          "menu": "support_screen_menu"
+        }
+      },
+      {
+        "class": "AboutScreen",
+        "name": "about_screen",
+        "title": "about_screen",
+        "icon": "about_screen_icon",
+        "extras": {
+          "includedItems": {
+            "app_version": true,
+            "ayla_sdk_version": true,
+            "mobile_sdk_version": true,
+            "os_version": true,
+            "ayla_service": true,
+            "ayla_service_location": true,
+            "network_operator": true,
+            "language": true,
+            "build_type": true,
+            "oem_configuration": true,
+            "device_model": true,
+            "time_zone": true
+          },
+          "labelColor":"#020202",
+          "valueColor":"#A0A0A5",
+          "separatorColor":"#00000000",
+          "listBackgroundColor":"white",
+          "textColor": "black"
+        }
+      },
+      {
+        "class": "HTMLViewScreen",
+        "name": "getting_started",
+        "title": "getting_started",
+        "icon": "user_manual_icon",
+        "extras": {"htmlResource": null,"htmlUrl": "https://developer.aylanetworks.com", "launchInBrowser": true}
+      },
+      {
+        "class": "HTMLViewScreen",
+        "name": "user_manual",
+        "title": "user_manual",
+        "icon": "user_manual_icon",
+        "extras": {"htmlResource": "user_manual_content","htmlUrl": "https://en.wikipedia.org/wiki/User_guide", "launchInBrowser": true}
+      },
+      {
+        "class": "HTMLViewScreen",
+        "name": "privacy_policy",
+        "title": "privacy_policy",
+        "icon": "privacy_policy_icon",
+        "extras": {"htmlResource": "privacy_policy_content","htmlUrl": "https://www.aylanetworks.com/privacy-policy",
+                  "launchInBrowser": true}
+      },
+      {
+        "class": "UIConfigTestScreen",
+        "name": "ui_config_test",
+        "title": "ui_config_test",
+        "extras": {
+          "textColor": "grey20"
+        }
+      }
+    ],
+    "applicationSettings": [
+      {
+        "name": "use_fingerprint_auth",
+        "type": "Boolean",
+        "defaultValue": false
+      },
+      {
+        "name": "choose_config",
+        "description": "choose_config_description",
+        "type": "LaunchScreen",
+        "defaultValue": "choose_config"
+      },
+      {
+        "name": "user_data_grants",
+        "description": "user_data_grants_description_settings",
+        "type": "Boolean",
+        "defaultValue": false
+      }
+    ],
+    "menus": [
+      { "name": "drawer_menu",
+        "items": [
+          "device_list",
+          "gateway_list",
+          "setup_wizard",
+          "shares_list",
+          "edit_account",
+	  "geofence_home",
+          "settings",
+          "support"
+        ],
+        "extras": {
+            "sign_out_icon": "sign_out_icon"
+        }
+      },
+      {
+        "name": "device_menu",
+        "items": [
+          "rename",
+          "device_rules",
+          "schedule_list", 
+          "share_devices",
+          "unregister", 
+          "factory_reset"
+        ]
+      },
+      {
+        "name": "support_screen_menu",
+        "items": [
+          "about_screen",
+          "getting_started",
+          "user_manual",
+          "privacy_policy",
+          "send_logs",
+	  "ui_config_test",
+          "choose_config",
+          "crash_app"
+        ]
+      },
+      {
+        "name": "geofence_screen_menu",
+        "items": [
+          "geofence_list",
+          "actions_list"
+        ]
+      }
+    ],
+    "colors": [
+      {"name": "white", "value": "#ffffff"},
+      {"name": "black", "value": "#000000"},
+      {"name": "clear", "value": "#00000000" },
+      {"name": "aylaGreen", "value": "#87cc4b"},
+      {"name": "primaryColor", "value": "#000000"},
+      {"name": "secondaryColor", "value": "#425A68"},
+      {"name": "account_list_color", "value": "#00000000"},
+      {"name": "accentColor", "value": "#759857"},
+      {"name": "darkSlate", "value": "#B0B7BC"},
+      {"name": "translucentWhite", "value": "#33FFFFFF"},
+      {"name": "grey20", "value": "#202020"},
+      {"name": "greyBG", "value": "#C0C2C4"},
+      {"name": "orange", "value": "#F76707"},
+      {"name": "brickRed", "value": "#C7432E"},
+      {"name": "coolBlue", "value": "#0093C7"},
+      {"name": "evbGreen", "value": "#759857"},
+      {"name": "lightBrown", "value": "#cd963f"},
+      {"name": "darkSlateBlue", "value": "#4d6e7d"},
+      {"name": "slateBlue", "value": "#989FA4"},
+      {"name": "paleYellow", "value": "#EDE6DC"},
+      {"name": "mapCircleBlue", "value": "#550000FF"},
+      {"name": "red", "value": "#ff0000"},
+      {"name": "darkBrown", "value": "#7F313A"},
+      {"name": "manatee", "value": "#93959A"},
+      {"name": "cello", "value": "#414F5B"}
+    ],
+    "homeScreen": "device_list",
+    "signInScreen": "sign_in",
+    "singleDeviceDetailsHomeScreen": false,
+    "drawer": {
+        "menu": "drawer_menu", 
+        "headerBackgroundColor": "slateBlue",
+        "headerTextColor": "white",
+        "headerImage": "drawer_header", 
+        "windowBackgroundColor": "slateBlue",
+        "listBackgroundColor": "clear",
+        "listTextColor": "white"
+    }
+  },
+  "privacy": {
+    "userDataGrants": ["metricsService", "uncaughtException"]
+  }
+}

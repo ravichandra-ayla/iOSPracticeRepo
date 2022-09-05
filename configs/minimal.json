@@ -1,0 +1,186 @@
+{
+  "version": "0.1",
+  "name": "MinimalApp",
+  "applicationIdentifier": "com.aylanetworks.sepiaapp",
+  "packages": [],
+  "bundles": [],
+  "sdkConfig": {
+    "appId": "sepiaapp-0dfc7900-id",
+    "appSecret": "sepiaapp-0dfc7900-6s3Wn_kLZpbrV2ZomcCqK0EuIeQ",
+    "allowMobileDSS": true,
+    "allowOfflineUse": true,
+    "serviceType": "Development",
+    "serviceLocation": "USA",
+    "consoleLogLevel": "Debug",
+    "fileLogLevel": "Debug",
+    "xPlatformID": "my_platform_id",
+    "defaultNetworkTimeoutMs": 5000
+  },
+  "devices": [
+    {
+      "class": "SepiaDevice",
+      "icon": "ayla_device",
+      "deviceInfo": {
+        "model": "*",
+        "oemModel": "*"
+      },
+      "detailScreen": "device_details",
+      "name": "generic_device_name"
+    }
+  ],
+  "userExperience": {
+    "defaultConfig": {
+      "toolbarTextColor":"#FFFFFF",
+      "toolbarColor": "black",
+      "windowBackgroundColor": "primaryColor",
+      "accentColor": "accentColor",
+      "textColor": "textColor",
+      "wantsTitleBar": true,
+      "disableDrawerMenu": false,
+      "buttonBackgroundColor": "accentColor",
+      "buttonTextColor": "white",
+      "listBackgroundColor": "white"
+    },
+    "templates": [
+      {
+        "name": "new_account_template",
+        "template_id": "new_account_template",
+        "subject": "new_account_subject"
+      },
+      {
+        "name": "reset_password_template",
+        "template_id": "reset_password_template",
+        "subject": "reset_password_subject"
+      },
+      {
+        "name": "resend_confirmation_template",
+        "template_id": "resend_confirmation_template",
+        "subject": "resend_confirmation_subject"
+      },
+      {
+        "name": "on_connection_lost_template",
+        "template_id": "on_connection_lost_template",
+        "subject": "on_connection_lost_subject"
+      },
+      {
+        "name": "on_connection_restore_template",
+        "template_id": "on_connection_restore_template",
+        "subject": "on_connection_restore_subject"
+      }
+    ],
+    "controls": [],
+    "screens": [
+      {
+        "class": "NoDevicesScreen",
+        "name": "no_devices",
+        "title": "no_devices",
+        "extras": {
+          "message": "no_devices_text",
+          "buttonText": "add_device",
+          "buttonTarget": "setup_wizard"
+        }
+      },
+      {
+        "class": "AllDevicesScreen",
+        "name": "device_list",
+        "title": "device_list",
+        "extras": {
+          "addDeviceScreen": "setup_wizard",
+          "sortBy": "connectedAt",
+          "sortingOrder": "descending"
+        }
+      },
+      {
+        "class": "ChooseConfigScreen",
+        "name": "choose_config",
+        "title": "choose_config"
+      },
+      {
+        "class": "SetupWizardScreen",
+        "name": "setup_wizard",
+        "title": "setup_wizard",
+        "extras": {
+        }
+      },
+      {
+        "class": "AccountDetailsScreen",
+        "name": "edit_account",
+        "title": "edit_account",
+        "extras": {"mode": "editAccount"}
+      },
+      {
+        "class": "AccountDetailsScreen",
+        "name": "sign_up",
+        "title": "sign_up",
+        "extras": {"mode": "signUp", "wantsTitleBar": true, "disableDrawerMenu": true}
+      },
+      {
+        "class": "SignInScreen",
+        "name": "sign_in",
+        "title": "sign_in",
+        "icon": "sign_in_icon",
+        "extras": {
+          "wantsTitleBar": false,
+          "disableDrawerMenu": true,
+          "windowBackgroundColor": "primaryColor",
+          "textColor": "#ffffff",
+          "editTextColor": "#ffffff",
+          "editTextBackgroundColor": "#33FFFFFF",
+          "logoImage": "logo"}
+      },
+      {
+        "class": "PasswordResetScreen",
+        "name": "password_reset",
+        "title": "password_reset",
+        "extras": { "disableDrawerMenu": true }
+      },
+      {
+        "class": "DeviceDetailsScreen",
+        "name": "device_details",
+        "title": "device_details",
+        "icon": "ic_device_details"
+      }
+    ],
+    "menus": [
+      { "name": "drawer_menu",
+        "items": [
+          "device_list",
+          "setup_wizard",
+          "edit_account",
+          "choose_config"
+        ]
+      },
+      {
+        "name": "ac_details_menu",
+        "items": ["ac_settings"]
+      },
+      {
+        "name": "support_screen_menu",
+        "items": [
+          "about_screen",
+          "user_manual",
+          "privacy_policy",
+          "send_logs",
+          "sign_out"
+        ]
+      }
+    ],
+    "colors": [
+      {"name": "primaryColor", "value": "#333333"},
+      {"name": "textColor", "value": "#FFFFFF"},
+      {"name": "accentColor", "value": "#225533"},
+      {"name": "black", "value": "#000000"},
+      {"name": "white", "value": "#ffffff"}
+    ],
+    "homeScreen": "device_list",
+    "singleDeviceDetailsHomeScreen": false,
+    "noDevicesScreen": "no_devices",
+    "signInScreen": "sign_in",
+    "drawer": {
+      "menu": "drawer_menu",
+      "headerBackgroundColor": "primaryColor",
+      "headerTextColor": "textColor",
+      "headerImage": "drawer_header"
+    }
+  }
+}

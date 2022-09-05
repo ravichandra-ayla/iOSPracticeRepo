@@ -1,0 +1,673 @@
+{
+  "version": "0.3",
+  "name": "COOLr",
+  "applicationIdentifier": "com.aylanetworks.coolr",
+  "packages": ["com.aylanetworks.coolr.screens", "com.aylanetworks.coolr.devices", "com.aylanetworks.coolr.controls"],
+  "bundles": ["com.aylanetworks.Sepia","com.aylanetworks.SepiaApp", "com.aylanetworks.SepiaDevApp"],
+  "sdkConfig": {
+    "appId": "sepiaapp-0dfc7900-id",
+    "appSecret": "sepiaapp-0dfc7900-6s3Wn_kLZpbrV2ZomcCqK0EuIeQ",
+    "allowMobileDSS": true,
+    "allowOfflineUse": true,
+    "serviceType": "Development",
+    "serviceLocation": "USA",
+    "consoleLogLevel": "Debug",
+    "fileLogLevel": "Debug",
+    "xPlatformID": "12345",
+    "defaultNetworkTimeoutMs": 5000
+  },
+  "devices": [
+    {
+      "class": "CoolrACDevice",
+      "name": "ac_device_name",
+      "icon": "logo_app",
+      "deviceInfo": {
+        "oemModel": "SacDemoDev"
+      },
+      "detailScreen" : "ac_details",
+      "deviceControl": "ac_alt_device_control",
+      "setupScreen": "setup_screen",
+      "ssidRegex": "Ayla-AC-[0-9A-Za-z]{12}",
+      "registrationType": "Same-LAN",
+      "managedProperties": [
+        {
+          "name": "f_humidity",
+          "roles": ["humidity"],
+          "notify": true,
+          "schedule": false,
+          "units": "%"
+        },
+        {
+          "name": "f_temp_in",
+          "roles": ["currentTemp"],
+          "notify": true,
+          "schedule": false,
+          "units": "F"
+        },
+        {
+          "name": "t_fan_speed",
+          "roles": ["fanControl"],
+          "notify": true,
+          "schedule": true,
+          "actions": [
+            {
+              "name": "fan_auto",
+              "icon": "fan_auto",
+              "value": 0
+            },
+            {
+              "name": "fan_silent",
+              "icon": "fan_silent",
+              "value": 1
+            },
+            {
+              "name": "fan_low",
+              "icon": "fan_low",
+              "value": 2
+            },
+            {
+              "name": "fan_medium",
+              "icon": "fan_medium",
+              "value": 3
+            },
+            {
+              "name": "fan_high",
+              "icon": "fan_high",
+              "value": 4
+            }
+          ]
+        },
+        {
+          "name": "t_work_mode",
+          "roles": ["modeControl"],
+          "notify": true,
+          "schedule": true,
+          "actions": [
+            {
+              "name": "mode_fan",
+              "icon": "mode_fan",
+              "value": 0
+            },
+            {
+              "name": "mode_heat",
+              "icon": "mode_heat",
+              "value": 1
+            },
+            {
+              "name": "mode_cool",
+              "icon": "mode_cool",
+              "value": 2
+            },
+            {
+              "name": "mode_dehumidify",
+              "icon": "mode_dehumidify",
+              "value": 3
+            },
+            {
+              "name": "mode_auto",
+              "icon": "mode_auto",
+              "value": 4
+            }
+          ]
+        },
+        {
+          "name": "t_temp",
+          "roles": ["tempSetpoint"],
+          "notify": true,
+          "schedule": true,
+          "units": "F",
+          "actions": [
+            {
+              "name": "temp_set",
+              "canEdit": true,
+              "constraints": { "minValue": 16, "maxValue": 32}
+            }
+          ]
+        },
+        {
+          "name": "t_fan_power",
+          "notify": true,
+          "schedule": true,
+          "actions": [
+            {
+              "name": "fan_vertical_off",
+              "value": 0
+            },
+            {
+              "name": "fan_vertical_on",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "t_fan_horizontal",
+          "notify": true,
+          "schedule": true,
+          "actions": [
+            {
+              "name": "fan_horizontal_off",
+              "value": 0
+            },
+            {
+              "name": "fan_horizontal_on",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "t_power",
+          "roles": ["power"],
+          "notify": true,
+          "schedule": true,
+          "actions": [
+            {
+              "name": "power_off",
+              "value": 0
+            },
+            {
+              "name": "power_on",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "t_sleep",
+          "notify": true,
+          "schedule": true,
+          "actions": [
+            {
+              "name": "sleep_off",
+              "value": 0
+            },
+            {
+              "name": "sleep_1",
+              "value": 1
+            },
+            {
+              "name": "sleep_2",
+              "value": 2
+            },
+            {
+              "name": "sleep_3",
+              "value": 3
+            },
+            {
+              "name": "sleep_4",
+              "value": 4
+            }
+          ]
+        },
+        {
+          "name": "t_temptype",
+          "notify": false,
+          "schedule": false,
+          "roles": ["temperatureUnits"],
+          "actions": [
+            {
+              "name": "F",
+              "value": 0
+            },
+            {
+              "name": "C",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "t_fan_mute",
+          "notify": true,
+          "schedule": true,
+          "actions": [
+            {
+              "name": "silent_off",
+              "value": 0
+            },
+            {
+              "name": "silent_on",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "t_eco",
+          "notify": true,
+          "schedule": true,
+          "roles": ["ecoMode"],
+          "actions": [
+            {
+              "name": "eco_off",
+              "value": 0
+            },
+            {
+              "name": "eco_on",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "t_run_mode",
+          "notify": true,
+          "schedule": true,
+          "actions": [
+            {
+              "name": "runmode_conversion",
+              "value": 0
+            },
+            {
+              "name": "runmode_fixed_frequency",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "t_temp_heatcold",
+          "notify": true,
+          "schedule": true,
+          "actions": [
+            {
+              "name": "fast_heatcool_off",
+              "value": 0
+            },
+            {
+              "name": "fast_heatcool_on",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "t_backlight",
+          "notify": true,
+          "schedule": true,
+          "actions": [
+            {
+              "name": "backlight_off",
+              "value": 0
+            },
+            {
+              "name": "backlight_on",
+              "value": 1
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "userExperience": {
+    "defaultConfig": {
+      "logoImage": "logo_app",
+      "toolbarTextColor":"#D9D9DE",
+      "toolbarColor": "#000000",
+      "windowBackgroundColor": "primaryColor",
+      "accentColor": "accentColor",
+      "textColor": "textColor",
+      "editTextColor": "textColor",
+      "wantsTitleBar": true,
+      "buttonBackgroundColor": "accentColor",
+      "buttonTextColor": "white",
+      "disableDrawerMenu": false
+    },
+    "applicationSettings": [
+      {
+        "name": "temperatureUnits",
+        "type": "MultipleChoice",
+        "choices": [ "F", "C"],
+        "defaultValue": "C"
+      }
+    ],
+    "templates": [
+      {
+        "name": "new_account_template",
+        "template_id": "new_account_template",
+        "subject": "new_account_subject"
+      },
+      {
+        "name": "reset_password_template",
+        "template_id": "reset_password_template",
+        "subject": "reset_password_subject"
+      },
+      {
+        "name": "resend_confirmation_template",
+        "template_id": "resend_confirmation_template",
+        "subject": "resend_confirmation_subject"
+      },
+      {
+        "name": "on_connection_lost_template",
+        "template_id": "on_connection_lost_template",
+        "subject": "on_connection_lost_subject"
+      },
+      {
+        "name": "on_connection_restore_template",
+        "template_id": "on_connection_restore_template",
+        "subject": "on_connection_restore_subject"
+      }
+    ],
+    "controls": [
+      {
+        "name": "ac_device_control",
+        "class": "ACDeviceControl",
+        "extras": {
+          "bgHeat": "heatColor",
+          "bgCool": "coolColor",
+          "bgDehumidify": "dehumidifyColor",
+          "bgOff": "offColor"
+        }
+      },
+      {
+        "name": "ac_power",
+        "class": "OnOffControl",
+        "extras": {
+          "property": "t_power",
+          "onImage": "icon_power_on",
+          "offImage": "icon_power_off"
+        }
+      },
+      {
+        "name": "ac_eco_mode",
+        "class": "OnOffControl",
+        "extras": {
+          "property": "t_eco",
+          "onImage": "icon_ecomode",
+          "offImage": "",
+          "readOnly": true
+        }
+      },
+      {
+        "name": "ac_mode_picker",
+        "class": "ActionPicker",
+        "extras": {
+          "property": "t_work_mode",
+          "textColor": "#ffffff",
+          "backgroundColor": "#00000000"
+        }
+      },
+      {
+        "name": "weather_control",
+        "class": "LocalWeatherControl",
+        "extras": {
+            "appId": "f053e25fbc678a2f2de68b5f945664f9"
+        }
+      },
+      {
+        "name": "ac_fan_picker",
+        "class": "ActionPicker",
+        "extras": {
+          "property": "t_fan_speed",
+          "textColor": "#ffffff",
+          "backgroundColor": "#00000000"
+        }
+      },
+      {
+        "name": "ac_alt_device_control",
+        "class": "ACDeviceControl2",
+        "extras": {
+          "bgHeat": "heatColor",
+          "bgHeat2": "heatColor2",
+          "bgCool": "coolColor",
+          "bgCool2": "coolColor2",
+          "bgDehumidify": "dehumidifyColor",
+          "bgDehumidify2": "dehumidifyColor2",
+          "bgOff": "offColor",
+          "bgOff2": "offColor2"
+        }
+      },
+      {
+        "name": "temp_setpoint_control",
+        "class": "SepiaTempSetpointControl",
+        "extras": {
+          "circleColor": "#44000000",
+          "arrowColor": "#ffffff"
+        }
+      },
+      {
+        "name": "temp_setpoint_control_details",
+        "class": "SepiaTempSetpointControl",
+        "extras": {
+          "circleColor": "#00000000",
+          "arrowColor": "#ffffff",
+          "horizontal": false,
+          "hasDots": false
+        }
+      },
+      {
+        "name": "temp_setpoint_control_horiz",
+        "class": "SepiaTempSetpointControl",
+        "extras": {
+          "circleColor": "#00000000",
+          "arrowColor": "#ffffff",
+          "horizontal": true,
+          "hasDots": false
+        }
+      }
+    ],
+    "screens": [
+      {
+        "class": "NoDevicesScreen",
+        "name": "no_devices",
+        "title": "no_devices",
+        "extras": {
+          "message": "no_ac_devices_message",
+          "buttonText": "add_ac_button_text",
+          "buttonTarget": "setup_wizard"
+        }
+      },
+      {
+        "class": "AppSettingsScreen",
+        "name": "application_settings",
+        "title": "application_settings"
+      },
+      {
+        "class": "AllDevicesScreen",
+        "name": "device_list",
+        "title": "my_air_conditioners",
+        "extras": {
+          "sortBy": "connectedAt",
+          "sortingOrder": "descending",
+          "addDeviceScreen": "setup_wizard"
+        }
+      },
+      {
+        "class": "ChooseConfigScreen",
+        "name": "choose_config",
+        "title": "choose_config"
+      },
+      {
+        "class": "SetupWizardScreen",
+        "name": "device_registration",
+        "title": "device_registration",
+        "extras": {
+            "mode": "register"
+        }
+      },
+      {
+        "class": "SetupWizardScreen",
+        "name": "setup_wizard",
+        "title": "setup_wizard",
+        "extras": {
+          "prerequisiteText": "ac_setup_prerequisite",
+          "prerequisiteHelp": "ac_setup_prerequisite_help",
+          "textBGColor" :"#425A68"
+        }
+      },
+            {
+        "class": "InputViewController",
+        "name": "forgot_password",
+        "title": "forgot_password",
+        "extras": 
+        { 
+            "disableDrawerMenu": true,
+            "wantsTitleBar": true 
+        }
+      },
+      {
+        "class": "AccountDetailsScreen",
+        "name": "edit_account",
+        "title": "edit_account",
+        "extras": {
+            "mode": "editAccount"
+        }
+      },
+      {
+        "class": "AccountDetailsScreen",
+        "name": "sign_up",
+        "title": "sign_up",
+        "extras": {
+            "mode": "newAccount", 
+            "wantsTitleBar": true, 
+            "disableDrawerMenu": true
+        }
+      },
+      {
+        "class": "SignInScreen",
+        "name": "sign_in",
+        "title": "sign_in",
+        "icon": "sign_in_icon",
+        "extras": {
+            "wantsTitleBar": false, 
+            "disableDrawerMenu": true,
+            "logoImage": "logo_app"
+        }
+      },
+      {
+        "class": "PasswordResetScreen",
+        "name": "password_reset",
+        "title": "password_reset",
+        "extras": 
+        { 
+            "disableDrawerMenu": true
+        }
+      },
+      {
+        "class": "DeviceDetailsScreen",
+        "name": "device_details",
+        "title": "device_details",
+        "icon": "ic_device_details"
+      },
+      {
+        "class": "CoolrACDetailsScreenA",
+        "name": "ac_details",
+        "title": "ac_details",
+        "icon": "ic_ac_details",
+        "menu": "ac_details_menu",
+        "extras": {
+          "bgHeat": "heatColor",
+          "bgHeat2": "heatColor2",
+          "bgCool": "coolColor",
+          "bgCool2": "coolColor2",
+          "bgDehumidify": "dehumidifyColor",
+          "bgDehumidify2": "dehumidifyColor2",
+          "bgOff": "offColor",
+          "bgOff2": "offColor2"
+        }
+      },
+      {
+        "class": "DeviceSettingsScreen",
+        "name": "ac_settings",
+        "title": "ac_settings",
+        "extras": {
+          "unregisterButton": true,
+          "propertySettings": [
+            "t_eco",
+            "t_temptype"
+          ]
+        }
+      },
+      {
+        "class": "MenuScreen",
+        "name": "support",
+        "title": "support_screen_title",
+        "extras": {"menu": "support_screen_menu"}
+      },
+      {
+        "class": "AboutScreen",
+        "name": "about_screen",
+        "title": "about_screen",
+        "icon": "about_screen_icon",
+        "extras": {
+          "includedItems": {
+            "app_version": true,
+            "ayla_sdk_version": true,
+            "mobile_sdk_version": true,
+            "os_version": true,
+            "ayla_service": true,
+            "ayla_service_location": true,
+            "network_operator": true,
+            "language": true
+          },
+          "labelColor":"#020202",
+          "valueColor":"#A0A0A5",
+          "separatorColor":"#00000000",
+          "listBackgroundColor":"#FFFFFF"
+        }
+      },
+      {
+        "class": "HTMLViewScreen",
+        "name": "user_manual",
+        "title": "user_manual",
+        "icon": "user_manual_icon",
+        "extras": {"htmlUrl": "http://home.howstuffworks.com/ac.htm", "launchInBrowser": false}
+      },
+      {
+        "class": "HTMLViewScreen",
+        "name": "privacy_policy",
+        "title": "privacy_policy",
+        "icon": "privacy_policy_icon",
+        "extras": {"htmlUrl": "https://www.aylanetworks.com/privacy-policy",
+                  "launchInBrowser": true}
+      }
+    ],
+    "menus": [
+      { "name": "drawer_menu",
+        "items": [
+          "device_list",
+          "setup_wizard",
+          "edit_account",
+          "choose_config",
+          "support",
+          "sign_out"
+        ]
+      },
+      {
+        "name": "ac_details_menu",
+        "items": ["ac_settings"]
+      },
+      {
+        "name": "support_screen_menu",
+        "items": [
+          "about_screen",
+          "user_manual",
+          "privacy_policy",
+          "send_logs"
+        ]
+      }
+    ],
+    "colors": [
+      {"name": "white", "value": "#ffffff"},
+      {"name": "primaryColor", "value": "#484A55"},
+      {"name": "textColor", "value": "#FFFFFF"},
+      {"name": "accentColor", "value": "#9D60B2"},
+      {"name": "black", "value": "#000000"},
+      {"name": "menuBackgroundColor", "value": "#726974"},
+      {"name": "heatColor", "value": "#F44A06"},
+      {"name": "heatColor2", "value": "#F78130"},
+      {"name": "coolColor", "value": "#228BE7"},
+      {"name": "coolColor2", "value": "#014470"},
+      {"name": "offColor", "value": "#6A6A6A"},
+      {"name": "offColor2", "value": "#6A6A6A"},
+      {"name": "dehumidifyColor", "value": "#D3C372"},
+      {"name": "dehumidifyColor2", "value": "#329283"}
+    ],
+    "homeScreen": "device_list",
+    "singleDeviceDetailsHomeScreen": true,
+    "noDevicesScreen": "no_devices",
+    "signInScreen": "sign_in",
+    "drawer": {
+        "menu": "drawer_menu",
+        "headerBackgroundColor": "menuBackgroundColor",
+        "headerTextColor": "textColor",
+        "textColor": "textColor",
+        "backgroundColor": "menuBackgroundColor",
+        "selectedColor": "textColor",
+        "selectedTextColor": "accentColor"
+    }
+  }
+}
