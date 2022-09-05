@@ -23,6 +23,10 @@ The [Common Sepia Assets](https://github.com/AylaNetworks/common_sepia_assets_Pu
 
 # Release Notes
 
+### [1.3.15](https://github.com/ravichandra-ayla/iOSPracticeRepo_Public/releases/tag/v1.3.15)
+#### (2022-09-01)
+- WiFi Legacy onboarding flow config support
+
 ### [1.3.12](https://github.com/ravichandra-ayla/iOSPracticeRepo_Public/releases/tag/v1.3.12)
 #### (2022-09-01)
 - WiFi Legacy onboarding flow config support
