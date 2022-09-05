@@ -21,7 +21,11 @@ The configuration file is documented [here](doc/sepia_config.md). The /doc folde
 The [Common Sepia Assets](https://github.com/AylaNetworks/common_sepia_assets_Public/) repo houses the Ayla Mobile UI Design Kit, associated documents and color specifications.
 
 
-## Releases
+# Release Notes
+
+### [1.3.5](https://github.com/ravichandra-ayla/iOSPracticeRepo_Public/releases/tag/v1.3.5)
+#### (2022-09-01)
+- WiFi Legacy onboarding flow config support
 
 ### 6.6.01 10/22/2020
 - Bump version to match SDK & Sepia & SepiaApp
